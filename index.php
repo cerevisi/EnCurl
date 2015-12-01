@@ -38,8 +38,8 @@ echo "<hr />";
 $someData = 12345;
 $someOtherData = "This is someOtherData";
 $someArray = array(
-	'This is someArray 0',
-	'This is someArray 1',
+    'This is someArray 0',
+    'This is someArray 1',
 );
 $someOtherArray = array(
 	'zero' => 'This is someOtherArray zero',

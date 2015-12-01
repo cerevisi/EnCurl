@@ -40,8 +40,8 @@ class EnCurl
     private static function makeIv()
     {
         return mcrypt_create_iv(
-                mcrypt_get_iv_size(self::CIPHER, self::MODE),
-                MCRYPT_RAND
+            mcrypt_get_iv_size(self::CIPHER, self::MODE),
+            MCRYPT_RAND
         );
     }
 
@@ -110,11 +110,11 @@ class EnCurl
         $iv = self::makeIv();
 
         $encrypted = mcrypt_encrypt(
-                self::CIPHER,
-                md5(self::$key),
-                json_encode($data),
-                self::MODE,
-                $iv
+            self::CIPHER,
+            md5(self::$key),
+            json_encode($data),
+            self::MODE,
+            $iv
         );
 
         /*
@@ -137,11 +137,11 @@ class EnCurl
         $iv = substr($data, 0, $ivSize);
 
         $decrypted = mcrypt_decrypt(
-                self::CIPHER,
-                md5(self::$key),
-                substr($data, $ivSize),
-                self::MODE,
-                $iv
+            self::CIPHER,
+            md5(self::$key),
+            substr($data, $ivSize),
+            self::MODE,
+            $iv
         );
 
         return json_decode($decrypted, true);
@@ -157,7 +157,7 @@ class EnCurl
         self::isKeyOrFail();
 
         $postData = array(
-                self::$postName => rawurlencode(self::encrypt())
+            self::$postName => rawurlencode(self::encrypt())
         );
 
         $ch = curl_init();
@@ -181,7 +181,7 @@ class EnCurl
 
         if (is_null($url)) {
             return self::decrypt(
-                    rawurldecode(filter_input(INPUT_POST, self::$postName))
+                rawurldecode(filter_input(INPUT_POST, self::$postName))
             );
         }
 
@@ -191,7 +191,7 @@ class EnCurl
         curl_setopt($ch, CURLOPT_VERBOSE, 1);
 
         return self::decrypt(
-                rawurldecode(curl_exec($ch))
+            rawurldecode(curl_exec($ch))
         );
     }
 
